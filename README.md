@@ -9,6 +9,11 @@ To make a whole lot of Twitter introductions at once, IntroBot just needs a plai
 
 ...coming soon...
 
+## Authors
+
+*David Harris
+*Phil Marshall
+
 ## License
 
 GPL v2. Share and share alike!
