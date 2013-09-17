@@ -11,8 +11,8 @@ To make a whole lot of Twitter introductions at once, IntroBot just needs a plai
 
 ## Authors
 
-*David Harris
-*Phil Marshall
+* David Harris [@physicsdavid](http://twitter.com/physicsdavid)
+* Phil Marshall [@drphilmarshall](http://twitter.com/drphilmarshall)
 
 ## License
 
