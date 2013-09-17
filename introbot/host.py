@@ -127,7 +127,11 @@ class Host(object):
         
         # Loop through pairings, making introductions!
         
-        # t.statuses.update(status="Hello world!")
+        for tweet in self.tweets:
+            
+            print "Introbot: making the following introduction:"
+            print "  ",tweet
+            # t.statuses.update(status=tweet)
         
         return
 
@@ -151,9 +155,6 @@ class Host(object):
             else:
                 ALL = 'all'
             self.tweets.append("Hey"+people+", you "+ALL+" like #"+word)
-            
-            print "Introbot tweet:"
-            print self.tweets[-1]
         
         return None
         
