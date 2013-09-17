@@ -1,18 +1,23 @@
 from twitter import *
+import introbot
 
-print "Hello, World!"
+# Connect to twitter, using the @SHDIntroBot account...
 
 t = Twitter(auth=OAuth("1873916461-IRdIhbpjeQdsPufbZK4dX7l9SUMoncAUBxYDZpn", "Jhgy1Yy0jNueJgmmp21eBQl8k0FYdmxHdTN7TUvBw", "oH4bcjSIjvHVQDRQT8hYw", "td1U71THL4Ubnj8NYCpg1U85d0KaLvslfXSoehFORs"))
 
-print "Twitter object set up"
+print "IntroBot: connected to Twitter"
 
-#t.search.tweets(q="#pycon")
+# Instantiate a host, who will do the introductions:
 
-#s = t.statuses.home_timeline()
+jeeves = introbot.Host()
 
-t.statuses.update(status="Hello world!")
+# Pass it the data it needs to figure out what to say:
 
-#t.direct_messages.new(
-#    user="physicsdavid",
-#    text="Test python tweet")
+database = 'example/pie.csv'
+jeeves.listen(database)
 
+# Pass the twitter object to the IntroBot, and have it start sending statuses.
+
+jeeves.introduce(t)
+
+# Done!
