@@ -13,7 +13,7 @@ jeeves = introbot.Host()
 
 # Pass it the data it needs to figure out what to say:
 
-database = 'example/pie.csv'
+database = 'example/SHD_users_bios.csv'
 jeeves.listen(database)
 
 # Pass the twitter object to the IntroBot, and have it start sending statuses.

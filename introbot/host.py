@@ -58,16 +58,18 @@ class Host(object):
         self.bios = []
 
         db = csv.reader(open(database,"rb"))
+
         for row in db:    
+#	    print row
             self.users.append(row[0])
             self.bios.append(row[1])
         
         # Check inputs:
         
-        print "IntroBot: heard about ",len(self.users)," people: ",self.users
+#        print "IntroBot: heard about ",len(self.users)," people: ",self.users
         
-        for k in range(len(self.users)):
-            print "IntroBot: knows that "+self.users[k]+" once said, ",self.bios[k]
+#        for k in range(len(self.users)):
+#            print "IntroBot: knows that "+self.users[k]+" once said, ",self.bios[k]
         
         # Make a set of keywords:
         
@@ -91,7 +93,7 @@ class Host(object):
         count = dict()
         for bio in self.bios:
             
-            for word in bio.split(' '):
+            for word in set(bio.split(' ')):
             
                 word = word.strip(string.punctuation + string.whitespace)
                 word = word.lower()
@@ -101,12 +103,13 @@ class Host(object):
         
         buzzwords = []
         for word in count:
-            if count[word] >= 2 and count[word] < 6:
+            
+            if count[word] >= 2 and count[word] < 10:
                 buzzwords.append(word)
         
         # Reject commonly used words:
         
-        commonwords = ['the','of','and','a','to','in','is','you','that','it','he','was','for','on','are','as','with','his','they','I','at','be','this','have','from','or','one','had','by','word','but','not','what','all','were','we','when','your','can','said','there','use','an','each','which','she','do','how','their','if','will','up','other','about','out','many','then','them','these','so','some','her','would','make','like','him','into','time','has','look']
+        commonwords = ['the','of','and','a','to','in','is','you','that','it','he','was','for','on','are','as','with','his','they','I','at','be','this','have','from','or','one','had','by','word','but','not','what','all','were','we','when','your','can','said','there','use','an','each','which','she','do','how','their','if','will','up','other','about','out','many','then','them','these','so','some','her','would','make','like','him','into','time','has','look','anything','everything','something','people','using',"i'm",'social','create','where','hack','build','more','us','project','self']
         for word in buzzwords:
             if word not in commonwords:
                 self.keywords.append(word)
@@ -129,9 +132,10 @@ class Host(object):
         
         for tweet in self.tweets:
             
-            print "Introbot: making the following introduction:"
+#            print "Introbot: making the following introduction:"
             print "  ",tweet
-            # t.statuses.update(status=tweet)
+            
+#            t.statuses.update(status=tweet)
         
         return
 
@@ -145,16 +149,24 @@ class Host(object):
             
             people = ''
             count = 0
+
             for k in range(len(self.users)):
-                if word in self.bios[k]:
-                     people = people + ' '+self.users[k]
+                biowords = string.split(string.lower(self.bios[k]))
+
+                #   need to strip out the punctuation from bioset here
+                strippedbios = set([x.strip(string.punctuation) for x in biowords])
+
+                # Now check the word is an exact match and not just part of another word
+                if any(word == s for s in strippedbios):
+#                if word in string.split(string.lower(self.bios[k])):
+                     people = people + ' @'+self.users[k]
                      count += 1
-            
+           
             if count == 2:
                 ALL = 'both'
             else:
                 ALL = 'all'
-            self.tweets.append("Hey"+people+", you "+ALL+" like #"+word)
+            self.tweets.append("Hey"+people+", you "+ALL+" like #"+word+" #sciencehackday")
         
         return None
         
